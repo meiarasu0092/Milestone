@@ -1,0 +1,213 @@
+Enter password: *********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 45
+Server version: 8.0.35 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++---------------------------+
+| Database                  |
++---------------------------+
+| airline_management_schema |
+| animals                   |
+| htl_mg_sys                |
+| information_schema        |
+| milestone                 |
+| movies_details            |
+| mysql                     |
+| performance_schema        |
+| sakila                    |
+| studentinfo               |
+| sys                       |
+| teacherdetails            |
+| world                     |
++---------------------------+
+13 rows in set (0.00 sec)
+
+mysql> use teacherdetails;
+Database changed
+mysql> create table teacherinfo(TeacherID int PRIMARY KEY,Name varchar(20),Gender varchar(20),Dateofjoin DATE,Salary int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc teacherinfo;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| TeacherID  | int         | NO   | PRI | NULL    |       |
+| Name       | varchar(20) | YES  |     | NULL    |       |
+| Gender     | varchar(20) | YES  |     | NULL    |       |
+| Dateofjoin | date        | YES  |     | NULL    |       |
+| Salary     | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table teacherinfo add Department varchar(20);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc teacherinfo
+    -> desc teacherinfo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc teacherinfo' at line 2
+mysql> desc teacherinfo;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| TeacherID  | int         | NO   | PRI | NULL    |       |
+| Name       | varchar(20) | YES  |     | NULL    |       |
+| Gender     | varchar(20) | YES  |     | NULL    |       |
+| Dateofjoin | date        | YES  |     | NULL    |       |
+| Salary     | int         | YES  |     | NULL    |       |
+| Department | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into teacherinfo values(1,'Mouli','Male',"2002-03-25",12000,'computer'),(2,'Nithish','Male',"2000-031-10",12000,'computer'),(3,'Manoj','Male',"2001-02-14",12000,'History'),(4,'Samantha','Female',"2002-10-17",10000,'computer'),(5,'Nayanthara','Female',"2002-12-12",12000,'History');
+ERROR 1292 (22007): Incorrect date value: '2000-031-10' for column 'Dateofjoin' at row 2
+mysql> insert into teacherinfo values(1,'Mouli','Male',"2002-03-25",12000,'computer'),(2,'Nithish','Male',"2000-01-10",12000,'computer'),(3,'Manoj','Male',"2001-02-14",12000,'History'),(4,'Samantha','Female',"2002-10-17",10000,'computer'),(5,'Nayanthara','Female',"2002-12-12",12000,'History');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++--------------------------+
+| Tables_in_teacherdetails |
++--------------------------+
+| teacherinfo              |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select*from teacherinfo;
++-----------+------------+--------+------------+--------+------------+
+| TeacherID | Name       | Gender | Dateofjoin | Salary | Department |
++-----------+------------+--------+------------+--------+------------+
+|         1 | Mouli      | Male   | 2002-03-25 |  12000 | computer   |
+|         2 | Nithish    | Male   | 2000-01-10 |  12000 | computer   |
+|         3 | Manoj      | Male   | 2001-02-14 |  12000 | History    |
+|         4 | Samantha   | Female | 2002-10-17 |  10000 | computer   |
+|         5 | Nayanthara | Female | 2002-12-12 |  12000 | History    |
++-----------+------------+--------+------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from teacherinfo where Department="Computer";
++-----------+----------+--------+------------+--------+------------+
+| TeacherID | Name     | Gender | Dateofjoin | Salary | Department |
++-----------+----------+--------+------------+--------+------------+
+|         1 | Mouli    | Male   | 2002-03-25 |  12000 | computer   |
+|         2 | Nithish  | Male   | 2000-01-10 |  12000 | computer   |
+|         4 | Samantha | Female | 2002-10-17 |  10000 | computer   |
++-----------+----------+--------+------------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from teacherinfo where Department="History" and Gender="Female";
++-----------+------------+--------+------------+--------+------------+
+| TeacherID | Name       | Gender | Dateofjoin | Salary | Department |
++-----------+------------+--------+------------+--------+------------+
+|         5 | Nayanthara | Female | 2002-12-12 |  12000 | History    |
++-----------+------------+--------+------------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select Name Datofjoin from teacherinfo orderby Datofjoin ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Datofjoin ASC' at line 1
+mysql> select Name Datofjoin from teacherinfo order by Datofjoin ;
++------------+
+| Datofjoin  |
++------------+
+| Manoj      |
+| Mouli      |
+| Nayanthara |
+| Nithish    |
+| Samantha   |
++------------+
+5 rows in set (0.00 sec)
+
+mysql> select Name,Datofjoin from teacherinfo order by Datofjoin ;
+ERROR 1054 (42S22): Unknown column 'Datofjoin' in 'field list'
+mysql> select Name,Dateofjoin from teacherinfo order by Dateofjoin ASC ;
++------------+------------+
+| Name       | Dateofjoin |
++------------+------------+
+| Nithish    | 2000-01-10 |
+| Manoj      | 2001-02-14 |
+| Mouli      | 2002-03-25 |
+| Samantha   | 2002-10-17 |
+| Nayanthara | 2002-12-12 |
++------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select Name,Department,Salary from teacherinfo where Gender="male";
++---------+------------+--------+
+| Name    | Department | Salary |
++---------+------------+--------+
+| Mouli   | computer   |  12000 |
+| Nithish | computer   |  12000 |
+| Manoj   | History    |  12000 |
++---------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select count(*) from teacherinfo where Salary < 10000;
++----------+
+| count(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from teacherinfo where Salary < 12000;
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> insert into teacherinfo values(6,'Mersha','Female',"2000-01-01",12000,'Computer');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from teacherinfo;
++-----------+------------+--------+------------+--------+------------+
+| TeacherID | Name       | Gender | Dateofjoin | Salary | Department |
++-----------+------------+--------+------------+--------+------------+
+|         1 | Mouli      | Male   | 2002-03-25 |  12000 | computer   |
+|         2 | Nithish    | Male   | 2000-01-10 |  12000 | computer   |
+|         3 | Manoj      | Male   | 2001-02-14 |  12000 | History    |
+|         4 | Samantha   | Female | 2002-10-17 |  10000 | computer   |
+|         5 | Nayanthara | Female | 2002-12-12 |  12000 | History    |
+|         6 | Mersha     | Female | 2000-01-01 |  12000 | Computer   |
++-----------+------------+--------+------------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select*from teacherinfo where Salary=(select MIN(Salary) from teacherinfo);
++-----------+----------+--------+------------+--------+------------+
+| TeacherID | Name     | Gender | Dateofjoin | Salary | Department |
++-----------+----------+--------+------------+--------+------------+
+|         4 | Samantha | Female | 2002-10-17 |  10000 | computer   |
++-----------+----------+--------+------------+--------+------------+
+1 row in set (0.01 sec)
+
+mysql> select*from teacherinfo where Salary=(select MIN(Salary) from teacherinfo where Salary>(select MIN(Salary) from teacherinfo));
++-----------+------------+--------+------------+--------+------------+
+| TeacherID | Name       | Gender | Dateofjoin | Salary | Department |
++-----------+------------+--------+------------+--------+------------+
+|         1 | Mouli      | Male   | 2002-03-25 |  12000 | computer   |
+|         2 | Nithish    | Male   | 2000-01-10 |  12000 | computer   |
+|         3 | Manoj      | Male   | 2001-02-14 |  12000 | History    |
+|         5 | Nayanthara | Female | 2002-12-12 |  12000 | History    |
+|         6 | Mersha     | Female | 2000-01-01 |  12000 | Computer   |
++-----------+------------+--------+------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select Department,AVG(Salary) AS AverageSalary from teacherinfo where Department="History" group by Department;
++------------+---------------+
+| Department | AverageSalary |
++------------+---------------+
+| History    |    12000.0000 |
++------------+---------------+
+1 row in set (0.01 sec)
+
+mysql>

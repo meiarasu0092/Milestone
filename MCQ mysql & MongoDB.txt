@@ -1,0 +1,44 @@
+MCQ mysql
+........
+
+1.All the above
+
+2.Relational Database Management System(RDMS)
+
+3.None of the Above
+
+4.English
+
+5.DROP TABLE XYZ
+
+6.Mysql.exe
+
+7.Long Text
+
+8.blob
+
+9.LIKE ??????
+
+MCQ MongoDB
+
+..........
+
+1.MongoDB
+
+2.Splitting a database into smaller, more manageable pieces called shards
+
+3. A type of data structure used to store data in MongoDB
+
+4. A group of related documents
+
+5. A group of MongoDB instances that maintain the same data set
+
+6. None of the above
+
+7.To add an element to the end of an array
+
+8.To increment the value of a field by a specified amount
+
+9.To set the value of a field in a document
+
+10. To skip a specified number of documents in the result set

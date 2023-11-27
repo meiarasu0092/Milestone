@@ -1,0 +1,486 @@
+Please enter a MongoDB connection string (Default: mongodb://localhost/):
+
+Current Mongosh Log ID: 65642dcb311c3adabd6be730
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.0
+Using MongoDB:          7.0.3
+Using Mongosh:          2.1.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-11-23T14:44:06.922+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin          40.00 KiB
+config         60.00 KiB
+local          40.00 KiB
+studentinfo   152.00 KiB
+studenttable    8.00 KiB
+test> use Bookstore
+switched to db Bookstore
+Bookstore> db.booksinfo.insertMany([{Book_id:100100,Btitle:"The Chirstmas Pig",Author:"JK Rowling",Price:800},{Book_id:100200,Btitle:"Anna Karenina",Author:"Leo Tolstoy",Price:950},{Book_id:100300,Btitle:"The Great Gatsby",Author:"F.scott Fitzgerald",Price:1000},{Book_id:100400,Btitle:"Lolita",Author:"Vladimir Nabokov",Price:1250},{Book_id:100500,Btitle:"MiddleMarch",Author:"George ELiot",Price:1500}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('656432d2311c3adabd6be731'),
+    '1': ObjectId('656432d2311c3adabd6be732'),
+    '2': ObjectId('656432d2311c3adabd6be733'),
+    '3': ObjectId('656432d2311c3adabd6be734'),
+    '4': ObjectId('656432d2311c3adabd6be735')
+  }
+}
+Bookstore> db.booksinfo.insertMany([{Book_id:100600,Btitle:"The Adventure of Huckleberry finn",Author:"Mark Twain",Price:1550},{Book_id:100700,Btitle:"The stories of Anton Chekhov",Author:"Anton Chekhov",Price:1650},{Book_id:100800,Btitle:"In search of lost time",Author:"Mareel Proust",Price:1700},{Book_id:100900,Btitle:"Hamlet",Author:"WIlliam Shakespeare",Price:1850},{Book_id:1010000,Btitle:"war and peace",Author:"Leo Tolstoy",Price:1500}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('65643440311c3adabd6be736'),
+    '1': ObjectId('65643440311c3adabd6be737'),
+    '2': ObjectId('65643440311c3adabd6be738'),
+    '3': ObjectId('65643440311c3adabd6be739'),
+    '4': ObjectId('65643440311c3adabd6be73a')
+  }
+}
+Bookstore> db.booksinfo.find()
+[
+  {
+    _id: ObjectId('656432d2311c3adabd6be731'),
+    Book_id: 100100,
+    Btitle: 'The Chirstmas Pig',
+    Author: 'JK Rowling',
+    Price: 800
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be732'),
+    Book_id: 100200,
+    Btitle: 'Anna Karenina',
+    Author: 'Leo Tolstoy',
+    Price: 950
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be733'),
+    Book_id: 100300,
+    Btitle: 'The Great Gatsby',
+    Author: 'F.scott Fitzgerald',
+    Price: 1000
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be734'),
+    Book_id: 100400,
+    Btitle: 'Lolita',
+    Author: 'Vladimir Nabokov',
+    Price: 1250
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be735'),
+    Book_id: 100500,
+    Btitle: 'MiddleMarch',
+    Author: 'George ELiot',
+    Price: 1500
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be736'),
+    Book_id: 100600,
+    Btitle: 'The Adventure of Huckleberry finn',
+    Author: 'Mark Twain',
+    Price: 1550
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be737'),
+    Book_id: 100700,
+    Btitle: 'The stories of Anton Chekhov',
+    Author: 'Anton Chekhov',
+    Price: 1650
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be738'),
+    Book_id: 100800,
+    Btitle: 'In search of lost time',
+    Author: 'Mareel Proust',
+    Price: 1700
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be739'),
+    Book_id: 100900,
+    Btitle: 'Hamlet',
+    Author: 'WIlliam Shakespeare',
+    Price: 1850
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be73a'),
+    Book_id: 1010000,
+    Btitle: 'war and peace',
+    Author: 'Leo Tolstoy',
+    Price: 1500
+  }
+]
+Bookstore> db.booksinfo.find({}, { _id: 0, Btitle: 1, authors: 1, price: 1 });
+[
+  { Btitle: 'The Chirstmas Pig' },
+  { Btitle: 'Anna Karenina' },
+  { Btitle: 'The Great Gatsby' },
+  { Btitle: 'Lolita' },
+  { Btitle: 'MiddleMarch' },
+  { Btitle: 'The Adventure of Huckleberry finn' },
+  { Btitle: 'The stories of Anton Chekhov' },
+  { Btitle: 'In search of lost time' },
+  { Btitle: 'Hamlet' },
+  { Btitle: 'war and peace' }
+]
+Bookstore> db.booksinfo.find({}, { _id: 0, Btitle: 1, Author: 1, Price: 1 });
+[
+  { Btitle: 'The Chirstmas Pig', Author: 'JK Rowling', Price: 800 },
+  { Btitle: 'Anna Karenina', Author: 'Leo Tolstoy', Price: 950 },
+  {
+    Btitle: 'The Great Gatsby',
+    Author: 'F.scott Fitzgerald',
+    Price: 1000
+  },
+  { Btitle: 'Lolita', Author: 'Vladimir Nabokov', Price: 1250 },
+  { Btitle: 'MiddleMarch', Author: 'George ELiot', Price: 1500 },
+  {
+    Btitle: 'The Adventure of Huckleberry finn',
+    Author: 'Mark Twain',
+    Price: 1550
+  },
+  {
+    Btitle: 'The stories of Anton Chekhov',
+    Author: 'Anton Chekhov',
+    Price: 1650
+  },
+  {
+    Btitle: 'In search of lost time',
+    Author: 'Mareel Proust',
+    Price: 1700
+  },
+  { Btitle: 'Hamlet', Author: 'WIlliam Shakespeare', Price: 1850 },
+  { Btitle: 'war and peace', Author: 'Leo Tolstoy', Price: 1500 }
+]
+Bookstore> db.booksinfo.find({}).sort({ Author: 1 }).limit(3);
+[
+  {
+    _id: ObjectId('65643440311c3adabd6be737'),
+    Book_id: 100700,
+    Btitle: 'The stories of Anton Chekhov',
+    Author: 'Anton Chekhov',
+    Price: 1650
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be733'),
+    Book_id: 100300,
+    Btitle: 'The Great Gatsby',
+    Author: 'F.scott Fitzgerald',
+    Price: 1000
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be735'),
+    Book_id: 100500,
+    Btitle: 'MiddleMarch',
+    Author: 'George ELiot',
+    Price: 1500
+  }
+]
+Bookstore> db.booksinfo.find({ Price: { $gt: 1500 } });
+[
+  {
+    _id: ObjectId('65643440311c3adabd6be736'),
+    Book_id: 100600,
+    Btitle: 'The Adventure of Huckleberry finn',
+    Author: 'Mark Twain',
+    Price: 1550
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be737'),
+    Book_id: 100700,
+    Btitle: 'The stories of Anton Chekhov',
+    Author: 'Anton Chekhov',
+    Price: 1650
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be738'),
+    Book_id: 100800,
+    Btitle: 'In search of lost time',
+    Author: 'Mareel Proust',
+    Price: 1700
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be739'),
+    Book_id: 100900,
+    Btitle: 'Hamlet',
+    Author: 'WIlliam Shakespeare',
+    Price: 1850
+  }
+]
+Bookstore> db.booksinfo.find({ Price: { $gt: 800, $lt: 2000 } }, { Btitle: 1 });
+[
+  {
+    _id: ObjectId('656432d2311c3adabd6be732'),
+    Btitle: 'Anna Karenina'
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be733'),
+    Btitle: 'The Great Gatsby'
+  },
+  { _id: ObjectId('656432d2311c3adabd6be734'), Btitle: 'Lolita' },
+  { _id: ObjectId('656432d2311c3adabd6be735'), Btitle: 'MiddleMarch' },
+  {
+    _id: ObjectId('65643440311c3adabd6be736'),
+    Btitle: 'The Adventure of Huckleberry finn'
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be737'),
+    Btitle: 'The stories of Anton Chekhov'
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be738'),
+    Btitle: 'In search of lost time'
+  },
+  { _id: ObjectId('65643440311c3adabd6be739'), Btitle: 'Hamlet' },
+  {
+    _id: ObjectId('65643440311c3adabd6be73a'),
+    Btitle: 'war and peace'
+  }
+]
+Bookstore> db.booksinfo.find({}).sort({ Btitle: 1 });
+[
+  {
+    _id: ObjectId('656432d2311c3adabd6be732'),
+    Book_id: 100200,
+    Btitle: 'Anna Karenina',
+    Author: 'Leo Tolstoy',
+    Price: 950
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be739'),
+    Book_id: 100900,
+    Btitle: 'Hamlet',
+    Author: 'WIlliam Shakespeare',
+    Price: 1850
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be738'),
+    Book_id: 100800,
+    Btitle: 'In search of lost time',
+    Author: 'Mareel Proust',
+    Price: 1700
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be734'),
+    Book_id: 100400,
+    Btitle: 'Lolita',
+    Author: 'Vladimir Nabokov',
+    Price: 1250
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be735'),
+    Book_id: 100500,
+    Btitle: 'MiddleMarch',
+    Author: 'George ELiot',
+    Price: 1500
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be736'),
+    Book_id: 100600,
+    Btitle: 'The Adventure of Huckleberry finn',
+    Author: 'Mark Twain',
+    Price: 1550
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be731'),
+    Book_id: 100100,
+    Btitle: 'The Chirstmas Pig',
+    Author: 'JK Rowling',
+    Price: 800
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be733'),
+    Book_id: 100300,
+    Btitle: 'The Great Gatsby',
+    Author: 'F.scott Fitzgerald',
+    Price: 1000
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be737'),
+    Book_id: 100700,
+    Btitle: 'The stories of Anton Chekhov',
+    Author: 'Anton Chekhov',
+    Price: 1650
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be73a'),
+    Book_id: 1010000,
+    Btitle: 'war and peace',
+    Author: 'Leo Tolstoy',
+    Price: 1500
+  }
+]
+Bookstore> db.booksinfo.find().sort({ Btitle: 1 });
+[
+  {
+    _id: ObjectId('656432d2311c3adabd6be732'),
+    Book_id: 100200,
+    Btitle: 'Anna Karenina',
+    Author: 'Leo Tolstoy',
+    Price: 950
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be739'),
+    Book_id: 100900,
+    Btitle: 'Hamlet',
+    Author: 'WIlliam Shakespeare',
+    Price: 1850
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be738'),
+    Book_id: 100800,
+    Btitle: 'In search of lost time',
+    Author: 'Mareel Proust',
+    Price: 1700
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be734'),
+    Book_id: 100400,
+    Btitle: 'Lolita',
+    Author: 'Vladimir Nabokov',
+    Price: 1250
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be735'),
+    Book_id: 100500,
+    Btitle: 'MiddleMarch',
+    Author: 'George ELiot',
+    Price: 1500
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be736'),
+    Book_id: 100600,
+    Btitle: 'The Adventure of Huckleberry finn',
+    Author: 'Mark Twain',
+    Price: 1550
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be731'),
+    Book_id: 100100,
+    Btitle: 'The Chirstmas Pig',
+    Author: 'JK Rowling',
+    Price: 800
+  },
+  {
+    _id: ObjectId('656432d2311c3adabd6be733'),
+    Book_id: 100300,
+    Btitle: 'The Great Gatsby',
+    Author: 'F.scott Fitzgerald',
+    Price: 1000
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be737'),
+    Book_id: 100700,
+    Btitle: 'The stories of Anton Chekhov',
+    Author: 'Anton Chekhov',
+    Price: 1650
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be73a'),
+    Book_id: 1010000,
+    Btitle: 'war and peace',
+    Author: 'Leo Tolstoy',
+    Price: 1500
+  }
+]
+Bookstore> db.booksinfo.find({ Author: "Leo Tolstoy" });
+[
+  {
+    _id: ObjectId('656432d2311c3adabd6be732'),
+    Book_id: 100200,
+    Btitle: 'Anna Karenina',
+    Author: 'Leo Tolstoy',
+    Price: 950
+  },
+  {
+    _id: ObjectId('65643440311c3adabd6be73a'),
+    Book_id: 1010000,
+    Btitle: 'war and peace',
+    Author: 'Leo Tolstoy',
+    Price: 1500
+  }
+]
+Bookstore> db.booksinfo.updateMany({Btitle:"Anna Karenina"},{$inc:{price:500}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Bookstore> db.booksinfo.findOne({Btitle:"Anna Karenina"},{})
+{
+  _id: ObjectId('656432d2311c3adabd6be732'),
+  Book_id: 100200,
+  Btitle: 'Anna Karenina',
+  Author: 'Leo Tolstoy',
+  Price: 950,
+  price: 500
+}
+Bookstore> db.booksinfo.updateMany({Btitle:"Anna Karenina"},{$ind:{price:500}});
+MongoServerError: Unknown modifier: $ind. Expected a valid update modifier or pipeline-style update specified as an array
+Bookstore> db.booksinfo.updateMany({Btitle:"Anna Karenina"},{$inc:{Price:500}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Bookstore> db.booksinfo.findOne({Btitle:"Anna Karenina"},{})
+{
+  _id: ObjectId('656432d2311c3adabd6be732'),
+  Book_id: 100200,
+  Btitle: 'Anna Karenina',
+  Author: 'Leo Tolstoy',
+  Price: 1450,
+  price: 500
+}
+Bookstore> db.booksinfo.updateMany({Btitle:"Anna Karenina"},{$inc:{Price:950+500}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Bookstore> db.booksinfo.findOne({Btitle:"Anna Karenina"},{})
+{
+  _id: ObjectId('656432d2311c3adabd6be732'),
+  Book_id: 100200,
+  Btitle: 'Anna Karenina',
+  Author: 'Leo Tolstoy',
+  Price: 2900,
+  price: 500
+}
+Bookstore> db.booksinfo.updateMany({Btitle:"Anna Karenina"},{$inc:{Price:950+500}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Bookstore> db.booksinfo.updatOne({Btitle:"The Great Gatsby"},{$set:{Price:2500}})
+TypeError: db.booksinfo.updatOne is not a function
+Bookstore> db.booksinfo.updateOne({Btitle:"The Great Gatsby"},{$set:{Price:2500}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Bookstore> db.booksinfo.findOne({Btitle:"The Great Gatsby"},{})
+{
+  _id: ObjectId('656432d2311c3adabd6be733'),
+  Book_id: 100300,
+  Btitle: 'The Great Gatsby',
+  Author: 'F.scott Fitzgerald',
+  Price: 2500
+}
